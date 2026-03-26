@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "knowledge-tracing"
+version = "0.1.0"
+description = "Knowledge tracing models and training pipeline."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+  { name = "Sohn Jun Ho" }
+]
+dependencies = [
+  "numpy==2.4.3",
+  "pandas==3.0.1",
+  "pytorch-lightning==2.6.1",
+  "torchmetrics==1.9.0",
+]
+
+[project.optional-dependencies]
+cu121 = ["torch==2.6.0+cu121", "torchao==0.6.1", "torchtune==0.6.1"]
+cu124 = ["torch==2.6.0+cu124", "torchao==0.6.1", "torchtune==0.6.1"]
+cpu   = ["torch==2.6.0+cpu",   "torchao==0.6.1", "torchtune==0.6.1"]
+notebooks = [
+  "jupyterlab==4.5.6",
+  "ipykernel==7.2.0",
+]
+dev = [
+  "pytest==9.0.2",
+  "ruff==0.15.5",
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu121"
+url = "https://download.pytorch.org/whl/cu121"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu124"
+url = "https://download.pytorch.org/whl/cu124"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = [
+  { index = "pytorch-cu121", extra = "cu121" },
+  { index = "pytorch-cu124", extra = "cu124" },
+  { index = "pytorch-cpu",   extra = "cpu"   },
+]
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 100
+
+[tool.ruff]
+line-length = 100
+exclude = [
+  "data/*.ipynb",
+  "notebooks/",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
