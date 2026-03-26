@@ -27,22 +27,21 @@ knowledge-tracing/
 ```
 
 ## Setup
-Pick the extra that matches your hardware:
 ```bash
-uv sync --extra cu124   # CUDA 12.4
-uv sync --extra cu121   # CUDA 12.1
-uv sync --extra cpu     # CPU only
+uv sync --extra dev --frozen
 ```
+
+`uv` will use the PyTorch CPU index automatically on Linux and PyPI on macOS.
 
 Optional notebook dependencies:
 ```bash
-uv sync --extra cu124 --extra notebooks
+uv sync --extra dev --extra notebooks --frozen
 ```
 
 ## Running Training
 From the repo root:
 ```bash
-PYTHONPATH=src python -m knowledge_tracing.main \
+uv run --frozen python -m knowledge_tracing.main \
   --data_path data/processed/assistment2009_processed.csv \
   --model_type upgraded \
   --max_epochs 50
