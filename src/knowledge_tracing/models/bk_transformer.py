@@ -172,6 +172,3 @@ class BKTransformer(nn.Module):
             + (1 - k_t[range(len(k_t)), skills]) * learning[range(len(k_t)), skills]
         )
         return correct, torch.clamp(k_t, 1e-4, 1 - 1e-4)
-
-
-__all__ = ["BKTransformer"]
