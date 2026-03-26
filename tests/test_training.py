@@ -3,7 +3,7 @@ import pytest
 import pytorch_lightning as pl
 import torch
 
-from knowledge_tracing.data.preprocessing import get_data_loaders
+from knowledge_tracing.data.datasets import get_data_loaders
 from knowledge_tracing.main import Config, build_model
 from knowledge_tracing.train import NeuralBKTLightning
 

@@ -16,20 +16,14 @@ knowledge-tracing/
     assistment2009_preprocessing.ipynb
   src/
     knowledge_tracing/
-      cli.py
       main.py
       train.py
       data/
         datasets.py
-        preprocessing.py
         validation.py
       models/
         bk_transformer.py
         bk_transformer_baseline.py
-        model.py
-        model_original.py
-      training/
-        lightning_module.py
 ```
 
 ## Setup
@@ -48,7 +42,7 @@ uv sync --extra cu124 --extra notebooks
 ## Running Training
 From the repo root:
 ```bash
-PYTHONPATH=src python -m knowledge_tracing.cli \
+PYTHONPATH=src python -m knowledge_tracing.main \
   --data_path data/processed/assistment2009_processed.csv \
   --model_type upgraded \
   --max_epochs 50
@@ -57,9 +51,8 @@ PYTHONPATH=src python -m knowledge_tracing.cli \
 Checkpoints and logs will be written to `artifacts/checkpoints` and `artifacts/lightning_logs`.
 
 ## Key Files
-- `src/knowledge_tracing/cli.py`: preferred CLI entrypoint.
+- `src/knowledge_tracing/main.py`: CLI entrypoint.
 - `src/knowledge_tracing/data/datasets.py`: preferred dataset loader and collate module.
-- `src/knowledge_tracing/training/lightning_module.py`: Lightning training wrapper.
 - `src/knowledge_tracing/models/bk_transformer.py`: preferred upgraded model path.
 - `src/knowledge_tracing/models/bk_transformer_baseline.py`: preferred baseline model path.
 

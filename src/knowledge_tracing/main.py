@@ -7,11 +7,11 @@ import pytorch_lightning as pl
 from pytorch_lightning.loggers import CSVLogger
 
 try:
-    from .data.preprocessing import get_data_loaders
+    from .data.datasets import get_data_loaders
     from .data.validation import validate_dataframe
     from .train import NeuralBKTLightning
 except ImportError:
-    from knowledge_tracing.data.preprocessing import get_data_loaders
+    from knowledge_tracing.data.datasets import get_data_loaders
     from knowledge_tracing.data.validation import validate_dataframe
     from knowledge_tracing.train import NeuralBKTLightning
 
