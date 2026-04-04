@@ -39,13 +39,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         '--data_path',
         type=Path,
-        default=(
-            Path(__file__).resolve().parents[2]
-            / 'data'
-            / 'processed'
-            / 'assistment2009_processed.csv'
-        ),
-        help='Path to preprocessed CSV containing user_id, skill_id, correct.'
+        required=True,
+        help='Path to one preprocessed CSV containing user_id, skill_id, correct.'
     )
     parser.add_argument('--n_embd', type=int, default=256)
     parser.add_argument('--n_layer', type=int, default=3)
@@ -56,12 +51,6 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument('--lr', type=float, default=1e-3)
     parser.add_argument('--max_epochs', type=int, default=50)
     parser.add_argument('--seed', type=int, default=42)
-    parser.add_argument(
-        '--order_column',
-        type=str,
-        default=None,
-        help='Optional interaction ordering column to enforce per-user sorting at runtime.'
-    )
     parser.add_argument(
         '--checkpoint_dir',
         type=Path,
@@ -121,7 +110,6 @@ def main(args: argparse.Namespace):
         val_split=0.1,
         test_split=0.1,
         seed=args.seed,
-        order_column=args.order_column,
     )
 
     model = build_model(config)
