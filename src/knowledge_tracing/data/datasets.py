@@ -19,22 +19,11 @@ def validate_split_ratios(train_split, val_split, test_split):
         raise ValueError("train_split + val_split + test_split must equal 1.0.")
 
 
-def resolve_order_column(df, order_column=None):
-    if order_column is not None:
-        if order_column not in df.columns:
-            raise ValueError(f"Order column not found: {order_column}")
-        return order_column
-    return None
-
-
-def create_sequences(df, block_size=818, order_column=None):
+def create_sequences(df, block_size=818):
     sequences = []
     group_keys = []
-    order_column = resolve_order_column(df, order_column=order_column)
 
     for user_id, group in df.groupby("user_id"):
-        if order_column is not None:
-            group = group.sort_values(order_column, kind="stable")
         seq = group[["skill_id", "correct"]].values
 
         if len(seq) > block_size:
@@ -78,14 +67,12 @@ def get_data_loaders(
     val_split=0.1,
     test_split=0.1,
     seed=42,
-    order_column=None,
 ):
     validate_split_ratios(train_split, val_split, test_split)
 
     sequences, group_keys = create_sequences(
         df,
         block_size=block_size,
-        order_column=order_column,
     )
 
     np.random.seed(seed)

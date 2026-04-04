@@ -11,7 +11,9 @@ knowledge-tracing/
   data/
     raw/
     processed/
-      assistment2009_processed.csv
+      icecream_3rd.csv
+      icecream_8th_processed.csv
+      skill_builder_preprocessed.csv
   notebooks/
     assistment2009_preprocessing.ipynb
   src/
@@ -42,7 +44,7 @@ uv sync --extra dev --extra notebooks --frozen
 From the repo root:
 ```bash
 uv run --frozen python -m knowledge_tracing.main \
-  --data_path data/processed/assistment2009_processed.csv \
+  --data_path data/processed/skill_builder_preprocessed.csv \
   --model_type upgraded \
   --max_epochs 50
 ```
@@ -57,5 +59,5 @@ Checkpoints and logs will be written to `artifacts/checkpoints` and `artifacts/l
 
 ## Notes
 - Input CSV must include columns: `user_id`, `skill_id`, `correct`.
-- Use `--order_column` only when you want the training pipeline to enforce per-user ordering at runtime.
-- The preferred sample dataset location is `data/processed/assistment2009_processed.csv`.
+- Pass exactly one processed CSV to `--data_path` for each training run.
+- Available processed datasets live under `data/processed/`.
