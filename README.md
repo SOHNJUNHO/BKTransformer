@@ -1,4 +1,4 @@
-# Knowledge Tracing
+# Based on Badrinath, A., & Pardos, Z. (2025). Optimizing Bayesian Knowledge Tracing with Neural Network Parameter Generation.
 
 A simple knowledge tracing training pipeline built with PyTorch Lightning.
 
